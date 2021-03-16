@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="结论搜索了半天，最终发现图片显示不了是因为最后网址生成的链接错误（会多出来时间月份等信息），导致绝对路径不正确，绝对路径貌似会有bug，最后使用相对路径的方法解决，为以下操作 打开_config.yml文件，修改下述内容 1post_asset_folder: true  在根目录下执行：（下载插件） 1npm install https:&#x2F;&#x2F;github.com&#x2F;C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo引用本地图片无法显示">
+<meta property="og:url" content="http://example.com/2021/03/16/%E5%8D%9A%E5%AE%A2%E5%AD%A6%E4%B9%A0/hexo%E5%BC%95%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA/index.html">
+<meta property="og:site_name" content="JackZHENG_blog">
+<meta property="og:description" content="结论搜索了半天，最终发现图片显示不了是因为最后网址生成的链接错误（会多出来时间月份等信息），导致绝对路径不正确，绝对路径貌似会有bug，最后使用相对路径的方法解决，为以下操作 打开_config.yml文件，修改下述内容 1post_asset_folder: true  在根目录下执行：（下载插件） 1npm install https:&#x2F;&#x2F;github.com&#x2F;C">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-16T09:08:22.000Z">
+<meta property="article:modified_time" content="2021-03-16T13:02:01.540Z">
+<meta property="article:author" content="JackZheng">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/03/16/%E5%8D%9A%E5%AE%A2%E5%AD%A6%E4%B9%A0/hexo%E5%BC%95%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>hexo引用本地图片无法显示 | JackZHENG_blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JackZHENG_blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/16/%E5%8D%9A%E5%AE%A2%E5%AD%A6%E4%B9%A0/hexo%E5%BC%95%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JackZheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackZHENG_blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo引用本地图片无法显示
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-16 17:08:22 / Modified: 21:02:01" itemprop="dateCreated datePublished" datetime="2021-03-16T17:08:22+08:00">2021-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">博客学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><strong>搜索了半天，最终发现图片显示不了是因为最后网址生成的链接错误（会多出来时间月份等信息），导致绝对路径不正确，绝对路径貌似会有bug，最后使用相对路径的方法解决，为以下操作</strong></p>
+<p>打开_config.yml文件，修改下述内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+
+<p>在根目录下执行：（下载插件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:&#x2F;&#x2F;github.com&#x2F;CodeFalling&#x2F;hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<p>确保在 md所在文件下创建和 md文件同名的文件夹，里面存放需要的图片，然后在 markdown 中插入图片：</p>
+<blockquote>
+<p>这里我使用typora自带的设置，在文件&gt;偏好设置&gt;图像中，可以设置将插入md文件中的图片备份到相应的位置（我这里设置为同名文件夹）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! [hexo image] (hexo&#x2F;image.png)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>总结：我理解为，<code>post_asset_folder</code>要设置为true（每新建一个md，都会产生对应的图片文件夹，不管是否有图片，我使用typora产生图片文件夹，这样可以减少文件夹的数量），变为相对路径，然后<code>hexo-asset-image</code>插件可以确定相应位置。官方推荐的标签插入方式，并不能预览图片，不推荐使用。</p>
+</blockquote>
+<hr>
+<h1 id="图片无法显示问题"><a href="#图片无法显示问题" class="headerlink" title="图片无法显示问题"></a>图片无法显示问题</h1><blockquote>
+<p>安装hexo-asset-image插件，这样正常使用markdown语法对图片的相对路径引用，即可实现编辑时可预览图片，且发布时插件自动将相对路径转为绝对路径。</p>
+</blockquote>
+<h2 id="方法1：-使用相对路径引用资源的"><a href="#方法1：-使用相对路径引用资源的" class="headerlink" title="方法1： 使用相对路径引用资源的"></a>方法1： 使用相对路径引用资源的</h2><p>使用文本编辑器打开站点根目录下的 <code>_ config.yml</code> 文件，将 <code>post_asset_folder</code> 值设置为 <code>true</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>修改之后会开启 Hexo 的文章资源文件管理功能。Hexo 将会在我们每一次通过 <code>hexo new &lt;title&gt;</code> 命令创建新文章时自动创建一个同名文件夹，于是我们便可以将文章所引用的相关资源放到这个同名文件夹下，然后通过相对路径引用。例如，你把一个 <code>example.jpg</code> 图片放在了这个同名文件夹中，使用相对路径的常规 markdown 语法 <code>&#123;% asset_img example.jpg  %&#125;</code>即可访问 。</p>
+<blockquote>
+<p>该种方法并不能解决我的问题。</p>
+</blockquote>
+<h2 id="方法2：使用一些免费的CDN-服务"><a href="#方法2：使用一些免费的CDN-服务" class="headerlink" title="方法2：使用一些免费的CDN 服务"></a>方法2：使用一些免费的CDN 服务</h2><blockquote>
+<p>还没尝试，先保存着</p>
+</blockquote>
+<p>先解释一下什么是 CDN 服务。</p>
+<p>CDN 全名是 Content Delivery Network，即内容分发网络。由于国内特殊的网络环境，许多把博客部署到 GitHub Pages 的同学都觉得访问速度太慢，尤其是有大量图片、大体积 CSS、JS 文件时。CDN 服务通过在全世界各个角落部署服务器来缓解这个问题，这些服务把来自源站（这里是 GitHub）的文件缓存在自己的各台服务器上，当有用户访问时则就近选择一台服务器返回结果，如此一来便能大大提高访问速度。</p>
+<p>jsDelivr 是众多的公共 CDN 服务商中的一家，长久以来通过稳定优质的服务赢得了不少口碑。尤其值得一体的是，据它官网上的说法：</p>
+<blockquote>
+<p>jsDelivr is the only public CDN with a valid ICP license issued by the Chinese government, and hundreds of locations directly in Mainland China.</p>
+</blockquote>
+<p>它的速度在中国相当不错。而且还有一个重要特性：支持加速来自 GitHub 仓库的文件！只要构造一个类似这样的 URL：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;&lt;用户名&gt;&#x2F;&lt;仓库名&gt;@&lt;分支名&gt;&#x2F;&lt;文件路径&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;AlanDecode&#x2F;site-Blog@gh-pages&#x2F;favicon.ico</span><br></pre></td></tr></table></figure>
+
+<p>就能直接访问对应文件。这一点可以被我们加以利用，用以加速博客上的 CSS、JS、图片等静态文件。</p>
+<p>Maverick 自带了这个功能。回到仓库首页，点击 conf.py 文件，然后点击编辑按钮。修改 <code>enable_jsdelivr</code> 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enable_jsdelivr &#x3D; &#123;</span><br><span class="line">    &quot;enabled&quot;: True,</span><br><span class="line">    &quot;repo&quot;: &quot;&lt;你的用户名&gt;&#x2F;Blog-With-GitHub-Boilerplate@gh-pages&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>点击 Commit changes。然后修改你刚才添加的文章，在里面插入一张仓库中的图片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是我的第一篇文章。文章使用 GitHub 管理，并通过 GitHub Actions 自动构建与发布！</span><br><span class="line"></span><br><span class="line">![幽灵公主剧照](.&#x2F;images&#x2F;Mononoke_Hime.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>发布后稍等片刻再访问你的网站，此时网站的图片都通过 jsDelivr 传输的。不信的话在图片上右键选择「在新标签页中打开图片」，看链接是否以 <code>cdn.jsdelivr.net</code> 开头。</p>
+<p>要插入你自己的图片，请把图片上传到 <code>src/images</code> 文件夹里，然后在文章中使用 Markdown 语法引用即可。</p>
+<p>除了在本地存储图片，还可以将图片上传到一些免费的CDN服务中。</p>
+<p>比如<a href="(https://cloudinary.com/)">Cloudinary</a>提供的图片CDN服务，在Cloudinary中上传图片后，会生成对应的url地址，将地址直接拿来引用即可。或者上传到<a href="https://link.zhihu.com/?target=https://imgchr.com/">路过图床</a>（不用梯子）。</p>
+<blockquote>
+<p> [cloudinary] (25G的免费空间)</p>
+</blockquote>
+<p>参考文档：</p>
+<p><a target="_blank" rel="noopener" href="http://www.xinxiaoyang.com/programming/2016-11-25-hexo-image-bug/">http://www.xinxiaoyang.com/programming/2016-11-25-hexo-image-bug/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xjm850552586/article/details/84101345">https://blog.csdn.net/xjm850552586/article/details/84101345</a></p>
+<p><a target="_blank" rel="noopener" href="http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/">http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/15/%E5%8D%9A%E5%AE%A2%E5%AD%A6%E4%B9%A0/%E6%97%A0%E6%B3%95%E6%88%90%E5%8A%9F%E6%89%93%E5%BC%80github%E7%BD%91%E5%9D%80%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="prev" title="无法打开github及个人博客的解决方法">
+      <i class="fa fa-chevron-left"></i> 无法打开github及个人博客的解决方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/16/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/PDF%E8%A7%A3%E9%94%81-%E5%8E%BB%E6%B0%B4%E5%8D%B0/" rel="next" title="PDF解锁_去水印">
+      PDF解锁_去水印 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">图片无法显示问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%BC%95%E7%94%A8%E8%B5%84%E6%BA%90%E7%9A%84"><span class="nav-number">2.1.</span> <span class="nav-text">方法1： 使用相对路径引用资源的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8%E4%B8%80%E4%BA%9B%E5%85%8D%E8%B4%B9%E7%9A%84CDN-%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.2.</span> <span class="nav-text">方法2：使用一些免费的CDN 服务</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JackZheng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackZheng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
